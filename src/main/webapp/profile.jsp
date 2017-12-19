@@ -13,6 +13,15 @@
 </head>
 <body>
 <%@ include file="partials/nav.jsp" %>
+
+<h1>YOU MADE IT</h1>
+<h1>YOU MADE IT</h1>
+<h1>YOU MADE IT</h1>
+<h1>YOU MADE IT</h1>
+<h1>YOU MADE IT</h1>
+<h1>YOU MADE IT</h1>
+<h1>YOU MADE IT</h1>
+
 <%@ include file="partials/scripts.jsp" %>
 </body>
 </html>

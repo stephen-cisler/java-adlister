@@ -9,9 +9,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%! int counter = 1; %>
     <% counter += 1; %>
-<c:if test="${usernameLogin.equals('admin')}">
+    <%if (request.getMethod().equalsIgnoreCase("post")) {
 
-</c:if>
+        String usernameLogin = request.getParameter("usernameLogin");
+        String password = request.getParameter("password");
+
+        if (usernameLogin.equals("admin") && password.equals("password")) {
+            response.sendRedirect("/profile.jsp");
+        }
+
+    }%>
 
 
 <html>
@@ -26,11 +33,11 @@
         <form method="post" action="login.jsp">
             <div class="form-group">
                 <label for="usernameLogin">Username</label>
-                <input name="usernameLogin" type="email" class="form-control" id="usernameLogin" placeholder="Username">
+                <input name="usernameLogin" type="text" class="form-control" id="usernameLogin" placeholder="Username">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="password">Password</label>
+                <input name="password" type="password" class="form-control" id="password" placeholder="Password">
             </div>
             <button type="submit" class="btn btn-default">Login</button>
         </form>
