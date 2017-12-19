@@ -11,7 +11,7 @@
     <title>Profile Page</title>
     <%@ include file="partials/head.jsp"%>
 </head>
-<body>
+<body id="page-top">
 <%@ include file="partials/nav.jsp" %>
 
 <section id="services">
