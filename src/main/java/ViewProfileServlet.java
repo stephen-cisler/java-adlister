@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "ViewProfileServlet", urlPatterns = "/profile")
 public class ViewProfileServlet extends HttpServlet {
@@ -13,6 +14,9 @@ public class ViewProfileServlet extends HttpServlet {
 
         String user = (String) session.getAttribute("user");
         if(user != null) {
+
+            String name = (String) session.getAttribute("user");
+            request.setAttribute("name", name);
             request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
         } else {
             response.sendRedirect("/login");

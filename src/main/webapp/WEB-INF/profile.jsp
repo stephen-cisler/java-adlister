@@ -10,7 +10,12 @@
 
     <div class="container">
         <h1>Viewing your profile.</h1>
+        <h2>Welcome, ${name}.</h2>
     </div>
+
+    <form action="/logout" method="POST">
+        <button type="submit">LOGOUT</button>
+    </form>
 
 </body>
 </html>
