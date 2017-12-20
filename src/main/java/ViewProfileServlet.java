@@ -16,7 +16,9 @@ public class ViewProfileServlet extends HttpServlet {
         if(user != null) {
 
             String name = (String) session.getAttribute("user");
+            String email = (String) session.getAttribute("email");
             request.setAttribute("name", name);
+            request.setAttribute("email", email);
             request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
         } else {
             response.sendRedirect("/login");

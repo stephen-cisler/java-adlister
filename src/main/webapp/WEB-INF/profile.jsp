@@ -11,6 +11,7 @@
     <div class="container">
         <h1>Viewing your profile.</h1>
         <h2>Welcome, ${name}.</h2>
+        <p>Current E-mail: <em>${email}</em></p>
     </div>
 
     <form action="/logout" method="POST">
