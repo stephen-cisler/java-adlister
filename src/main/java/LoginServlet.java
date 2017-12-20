@@ -9,7 +9,16 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
+
+        HttpSession session = request.getSession();
+        boolean validAttempt = false;
+
+        String user = (String) session.getAttribute("user");
+        if(user != null) {
+            response.sendRedirect("/profile");
+        } else {
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -18,15 +27,16 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
 
-        HttpSession session = request.getSession();
-        session.setAttribute("username", username);
-        session.setAttribute("password", password);
-        String isAdmin = (String) session.getAttribute("username");
-        String passwordSes = (String) session.getAttribute("username");
-        boolean validAttempt = isAdmin.equalsIgnoreCase("admin") || passwordSes.equals("password");
+//        HttpSession session = request.getSession();
+//        session.setAttribute("username", username);
+//        session.setAttribute("password", password);
+//        String isAdmin = (String) session.getAttribute("username");
+//        String passwordSes = (String) session.getAttribute("username");
+        boolean validAttempt = username.equals("admin") || password.equals("password");
 
         if (validAttempt) {
-            session.setAttribute("isAdmin", "true");
+            HttpSession session = request.getSession();
+            session.setAttribute("user", username);
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
