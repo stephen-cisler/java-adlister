@@ -3,6 +3,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
@@ -12,11 +13,20 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        boolean validAttempt = username.equals("admin") && password.equals("password");
+
+
+        HttpSession session = request.getSession();
+        session.setAttribute("username", username);
+        session.setAttribute("password", password);
+        String isAdmin = (String) session.getAttribute("username");
+        String passwordSes = (String) session.getAttribute("username");
+        boolean validAttempt = isAdmin.equalsIgnoreCase("admin") || passwordSes.equals("password");
 
         if (validAttempt) {
+            session.setAttribute("isAdmin", "true");
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
