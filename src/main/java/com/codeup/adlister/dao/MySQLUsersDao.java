@@ -25,11 +25,14 @@ public class MySQLUsersDao implements Users{
     @Override
     public User findByUsername(String username) {
         try {
-            String sql = "SELECT * FROM users WHERE ?";
+            System.out.println("starting run. username = " + username);
+            String sql = "SELECT * FROM users WHERE username = ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, username);
-            stmt.executeUpdate();
+            stmt.executeQuery();
             ResultSet rs = stmt.getResultSet();
+            System.out.println("end of findByUsername");
+            rs.next();
             return extractUser(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error finding user.", e);
