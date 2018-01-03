@@ -1,4 +1,6 @@
-USE adlister_db;
+USE ad_lister_datab;
+
+DROP TABLE
 
 DROP TABLE IF EXISTS ads;
 DROP TABLE IF EXISTS users;
