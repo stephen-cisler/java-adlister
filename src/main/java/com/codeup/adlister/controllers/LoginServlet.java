@@ -34,6 +34,10 @@ public class LoginServlet extends HttpServlet {
 
         // Find a username that matches to compare passwords with
         User user = DaoFactory.getUsersDao().findByUsername(username);
+        if (user == null) {
+            response.sendRedirect("/login");
+            return;
+        }
         if (user.getPassword().equals(password)) {
             validAttempt = true;
         }
