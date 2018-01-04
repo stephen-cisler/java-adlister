@@ -25,13 +25,11 @@ public class MySQLUsersDao implements Users{
     @Override
     public User findByUsername(String username) {
         try {
-            System.out.println("starting run. username = " + username);
             String sql = "SELECT * FROM users WHERE username = ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, username);
             stmt.executeQuery();
             ResultSet rs = stmt.getResultSet();
-            System.out.println("end of findByUsername");
             rs.next();
             return extractUser(rs);
         } catch (SQLException e) {
@@ -51,9 +49,6 @@ public class MySQLUsersDao implements Users{
     @Override
     public Long insert(User user) {
         try {
-            System.out.println(user.getUsername());
-            System.out.println(user.getPassword());
-            System.out.println(user.getEmail());
             PreparedStatement stmt = createUserInsertQuery(user);
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
@@ -64,6 +59,7 @@ public class MySQLUsersDao implements Users{
         }
     }
 
+    // Creates the Insert Query by taking in User obj made on /register Servlet
     private PreparedStatement createUserInsertQuery(User user) throws SQLException{
         String sql = "INSERT INTO users (username, email, password ) VALUES (?, ?, ?)";
         PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

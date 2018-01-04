@@ -25,7 +25,6 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println("hey, " + username + " " + password);
 
         // TODO: find a record in your database that matches the submitted password
         // TODO: make sure we find a user with that username
@@ -33,13 +32,10 @@ public class LoginServlet extends HttpServlet {
 
         boolean validAttempt = false;
 
+        // Find a username that matches to compare passwords with
         User user = DaoFactory.getUsersDao().findByUsername(username);
-
         if (user.getPassword().equals(password)) {
-            System.out.println("password match");
             validAttempt = true;
-//            request.getSession().setAttribute("user",username);
-//            response.sendRedirect("/profile");
         }
 
         if (validAttempt) {

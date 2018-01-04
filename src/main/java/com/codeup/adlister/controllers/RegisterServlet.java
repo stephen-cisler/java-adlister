@@ -14,6 +14,7 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+
         // TODO: show the registration form
         if (request.getSession().getAttribute("user") != null) {
             response.sendRedirect("/profile");
@@ -23,20 +24,19 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        // Values for parameters
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("passwordConfirm");
-//        User existingUser = null;
+
+        // TODO: ensure the submitted information is valid
+        // TODO: create a new user based off of the submitted information
+        // TODO: if a user was successfully created, send them to their profile
+
+        // New User obj for Insert
         User user = new User(1, username, email, password);
-
-
-        try {
-            User existingUser = DaoFactory.getUsersDao().findByUsername(username);
-            response.sendRedirect("/register");
-        } catch (RuntimeException e) {
-            e.getMessage();
-        }
 
             if (!password.equals(passwordConfirm)){
             response.sendRedirect("/register");
@@ -46,8 +46,5 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("/profile");
 
         }
-        // TODO: ensure the submitted information is valid
-        // TODO: create a new user based off of the submitted information
-        // TODO: if a user was successfully created, send them to their profile
     }
 }
